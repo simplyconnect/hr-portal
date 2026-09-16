@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simply Connect Attendance — Sign in</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="login-wrap">
+  <div class="login-panel">
+    <div class="login-card" id="loginPanel" data-role="employee">
+      <div class="login-card-top">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="logo-chip" style="padding:6px 10px;"><img src="assets/logo.png" alt="Simply Connect" style="height:20px;width:auto;display:block;"></div>
+        </div>
+        <button class="btn-icon" data-theme-toggle aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+      <h2>Welcome back</h2>
+      <p class="sub">Sign in to view your attendance dashboard.</p>
+
+      <div class="role-tabs">
+        <button type="button" class="role-tab active" data-role="employee">Employee</button>
+        <button type="button" class="role-tab" data-role="admin">Admin</button>
+      </div>
+
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label id="idLabel" for="loginId">Employee ID or email</label>
+          <input type="text" id="loginId" placeholder="EMP001 or your email" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password" required>
+        </div>
+        <div class="field-error" id="loginError"></div>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </form>
+
+      <div class="cred-hint" id="credHint">Demo: EMP001 / employee123</div>
+    </div>
+  </div>
+
+  <div class="login-brand">
+    <div class="brand-mark">
+      <div class="logo-chip">
+        <img class="brand-logo-img" src="assets/logo.png" alt="Simply Connect">
+      </div>
+    </div>
+
+    <div class="login-hero">
+      <h1>Attendance that runs itself, from the door to the dashboard.</h1>
+
+      <div class="login-clock mono" id="liveClock">00:00:00</div>
+      <div class="login-date" id="liveDate">Loading date…</div>
+
+      <div class="login-carousel" id="loginCarousel">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide active">
+            <div class="carousel-art"><img src="assets/illustrations/illus-attendance.png" alt="Confirmed attendance"></div>
+            <div class="carousel-caption">Attendance confirmed the moment they punch in</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="carousel-art"><img src="assets/illustrations/illus-reports.png" alt="Data reports"></div>
+            <div class="carousel-caption">Reports and payroll insights, ready when you need them</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="carousel-art"><img src="assets/illustrations/illus-onboarding.png" alt="Onboarding"></div>
+            <div class="carousel-caption">Onboard new hires and get them tracked in minutes</div>
+          </div>
+        </div>
+        <button class="carousel-arrow prev" id="carouselPrev" aria-label="Previous slide">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button class="carousel-arrow next" id="carouselNext" aria-label="Next slide">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+        <div class="carousel-dots" id="carouselDots">
+          <button class="carousel-dot active" data-i="0" aria-label="Slide 1"></button>
+          <button class="carousel-dot" data-i="1" aria-label="Slide 2"></button>
+          <button class="carousel-dot" data-i="2" aria-label="Slide 3"></button>
+        </div>
+      </div>
+
+      <p>Biometric punches sync straight from the gate to your team's records — no spreadsheets, no manual entry, no end-of-month scramble.</p>
+
+      <div class="login-stats">
+        <div><b class="mono">152</b><span>Employees tracked</span></div>
+        <div><b class="mono">4</b><span>Biometric terminals</span></div>
+        <div><b class="mono">99.2%</b><span>Sync uptime</span></div>
+      </div>
+    </div>
+
+    <div class="login-foot">© 2026 Simply Connect — Attendance Suite</div>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/mockData.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/auth.js"></script>
+<script>
+  // If already logged in, skip straight to the right dashboard.
+  (function () {
+    const u = Session.get();
+    if (u) window.location.href = u.role === "admin" ? "admin.html" : "employee.html";
+  })();
+
+  function tickClock() {
+    const now = new Date();
+    document.getElementById("liveClock").textContent = now.toLocaleTimeString("en-US", { hour12: false });
+    document.getElementById("liveDate").textContent = now.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+  }
+  tickClock();
+  setInterval(tickClock, 1000);
+
+  // Hero image carousel — auto-advances, clicking a dot jumps straight there.
+  (function () {
+    const slides = document.querySelectorAll("#carouselTrack .carousel-slide");
+    const dots = document.querySelectorAll("#carouselDots .carousel-dot");
+    if (!slides.length) return;
+    let index = 0;
+    let timer = null;
+
+    function show(i) {
+      index = (i + slides.length) % slides.length;
+      slides.forEach((s, n) => s.classList.toggle("active", n === index));
+      dots.forEach((d, n) => d.classList.toggle("active", n === index));
+    }
+    function next() { show(index + 1); }
+    function prev() { show(index - 1); }
+    function restart() {
+      clearInterval(timer);
+      timer = setInterval(next, 4200);
+    }
+    dots.forEach((dot) => dot.addEventListener("click", () => { show(+dot.dataset.i); restart(); }));
+    document.getElementById("carouselNext").addEventListener("click", () => { next(); restart(); });
+    document.getElementById("carouselPrev").addEventListener("click", () => { prev(); restart(); });
+    restart();
+  })();
+</script>
+</body>
+</html>

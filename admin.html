@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Console — Simply Connect Attendance</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="sidebar-scrim" id="scrim"></div>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-chip"><img class="brand-logo-img" src="assets/logo-icon.png" alt="Simply Connect"></div>
+    </div>
+
+    <div class="nav-group-label">Admin</div>
+    <nav>
+      <a href="#" class="nav-item active" data-view="overview" title="Overview">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        Home
+      </a>
+      <a href="#" class="nav-item" data-view="employees" title="Employees">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Employees
+      </a>
+      <a href="#" class="nav-item" data-view="live" title="Live attendance">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        Live
+      </a>
+      <a href="#" class="nav-item" data-view="departments" title="Departments">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V8l9-5 9 5v13M9 21v-6h6v6"/></svg>
+        Depts
+      </a>
+      <a href="#" class="nav-item" data-view="requests" title="Requests">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h4M9 11V9a2 2 0 0 1 2-2h6l4 4v7a2 2 0 0 1-2 2h-8"/><path d="M9 11v11M13 15h4"/></svg>
+        Requests
+      </a>
+      <a href="#" class="nav-item" data-view="payroll" title="Payroll">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg>
+        Payroll
+      </a>
+      <a href="#" class="nav-item" data-view="reports" title="Reports">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M9 13h6M9 17h6"/></svg>
+        Reports
+      </a>
+      <a href="#" class="nav-item" data-view="sync" title="Machine sync">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>
+        Devices
+      </a>
+
+      <div class="nav-group-label">Account</div>
+      <a href="#" class="nav-item" data-view="settings" title="Settings">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Settings
+      </a>
+    </nav>
+
+    <div class="sidebar-foot">
+      <div class="sidebar-user">
+        <div class="avatar" id="sideAvatar">--</div>
+        <div>
+          <div class="name" id="sideName">Loading…</div>
+          <div class="role">Administrator</div>
+        </div>
+      </div>
+      <a href="#" class="logout-link" id="logoutBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        Sign out
+      </a>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <div class="topbar-brand">
+        <div class="logo-chip" style="padding:5px 9px;"><img src="assets/logo.png" alt="Simply Connect" style="height:16px;width:auto;display:block;"></div>
+        <span class="tb-company-pill">Simply Connect
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+        </span>
+      </div>
+      <div class="topbar-search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" id="globalSearch" placeholder="Search employees…">
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-clock mono"><span class="live-dot"></span><span id="topClock">--:--:--</span></span>
+        <button class="btn-icon" id="helpBtn" aria-label="Help" title="Help">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 4.9.8c0 1.7-2.4 2-2.4 3.7"/><path d="M12 17.5h.01"/></svg>
+        </button>
+        <div class="notif-wrap">
+          <button class="btn-icon" id="notifBtn" aria-label="Notifications" title="Notifications">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="tb-dot hidden" id="notifDot"></span>
+          </button>
+          <div class="notif-panel" id="notifPanel">
+            <div class="notif-head"><strong>Notifications</strong><button id="markAllReadBtn">Mark all read</button></div>
+            <div id="notifList"></div>
+          </div>
+        </div>
+        <button class="btn-icon" data-theme-toggle aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="avatar tb-avatar" id="topAvatarBtn" title="Settings">--</button>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- OVERVIEW -->
+      <section class="view active" id="view-overview">
+        <div class="page-head">
+          <div><h1>Good to see you</h1><p class="desc" id="todayLongDate">—</p></div>
+          <span class="topbar-clock mono" style="font-size:15px;"><span class="live-dot"></span><span id="heroClockAdmin">--:--:--</span></span>
+        </div>
+
+        <div class="grid grid-4 stagger-in" style="margin-bottom:18px;" id="kpiRow"></div>
+
+        <div class="grid grid-2-1" style="margin-bottom:18px;">
+          <div class="card">
+            <div class="card-title">Attendance trend — last 14 days</div>
+            <canvas class="chart-canvas" id="trendChart"></canvas>
+          </div>
+          <div class="card">
+            <div class="card-title">Today's breakdown</div>
+            <canvas class="chart-canvas sm" id="todayDonut"></canvas>
+            <div class="cal-legend" style="margin-top:10px;justify-content:center;">
+              <span><i style="background:var(--ok)"></i>Present</span>
+              <span><i style="background:var(--warn)"></i>Late</span>
+              <span><i style="background:var(--danger)"></i>Absent</span>
+              <span><i style="background:var(--info)"></i>Leave</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-2-1">
+          <div class="card">
+            <div class="card-title">Department-wise presence today <span class="link" data-goto="departments">View all</span></div>
+            <div class="grid grid-2" id="deptMiniRow"></div>
+          </div>
+          <div class="card">
+            <div class="card-title">Live feed <span class="link" data-goto="live">Open live view</span></div>
+            <div id="miniLiveFeed"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EMPLOYEES -->
+      <section class="view" id="view-employees">
+        <div class="page-head"><div><h1>All employees</h1><p class="desc">152 employees across 9 departments.</p></div></div>
+        <div class="card">
+          <div class="table-toolbar">
+            <div class="filter-row">
+              <input type="text" class="search-input" id="empSearch" placeholder="Search by name, ID, email…">
+              <select class="select" id="empDeptFilter"><option value="">All departments</option></select>
+              <select class="select" id="empStatusFilter">
+                <option value="">All statuses</option><option>Active</option><option>Inactive</option>
+              </select>
+            </div>
+            <div style="display:flex;gap:8px;">
+              <button class="btn btn-ghost btn-sm" id="exportEmpBtn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16"/></svg>
+                Export CSV
+              </button>
+              <button class="btn btn-primary btn-sm" id="addEmpBtn" style="width:auto;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                Add employee
+              </button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Employee</th><th>Department</th><th>Designation</th><th>Status</th><th>Joined</th><th></th></tr></thead>
+              <tbody id="empTableBody"></tbody>
+            </table>
+          </div>
+          <div class="pagination" id="empPagination"></div>
+        </div>
+      </section>
+
+      <!-- LIVE ATTENDANCE -->
+      <section class="view" id="view-live">
+        <div class="page-head">
+          <div><h1>Live attendance — today</h1><p class="desc" id="liveDateLabel">—</p></div>
+          <span class="badge badge-online" id="liveSyncBadge">● Synced just now</span>
+        </div>
+        <div class="grid grid-4 stagger-in" style="margin-bottom:18px;" id="liveStatRow"></div>
+        <div class="card">
+          <div class="table-toolbar">
+            <div class="filter-row">
+              <input type="text" class="search-input" id="liveSearch" placeholder="Search employee…">
+              <select class="select" id="liveStatusFilter">
+                <option value="">All statuses</option><option>Present</option><option>Late</option><option>Absent</option><option>Half Day</option><option>On Leave</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Employee</th><th>Department</th><th>Status</th><th>Punch In</th><th>Punch Out</th><th>Working hours</th></tr></thead>
+              <tbody id="liveTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- DEPARTMENTS -->
+      <section class="view" id="view-departments">
+        <div class="page-head"><div><h1>Departments</h1><p class="desc">Headcount and today's presence, by team.</p></div></div>
+        <div class="grid grid-3 stagger-in" id="deptGrid"></div>
+      </section>
+
+      <!-- REPORTS -->
+      <section class="view" id="view-reports">
+        <div class="page-head"><div><h1>Reports</h1><p class="desc">Generate a range report, or pull the current late/absentee list.</p></div></div>
+
+        <div class="card" style="margin-bottom:18px;">
+          <div class="card-title">Date range report</div>
+          <div class="filter-row" style="margin-bottom:16px;">
+            <input type="date" class="select" id="repFrom">
+            <input type="date" class="select" id="repTo">
+            <select class="select" id="repDept"><option value="">All departments</option></select>
+            <button class="btn btn-primary btn-sm" id="repGenerate" style="width:auto;">Generate report</button>
+          </div>
+          <div class="grid grid-4" id="repSummaryRow"></div>
+        </div>
+
+        <div class="card">
+          <div class="table-toolbar">
+            <div class="card-title" style="margin-bottom:0;">Late & absentee records</div>
+            <button class="btn btn-ghost btn-sm" id="exportRepBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16"/></svg>
+              Export CSV
+            </button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Employee</th><th>Department</th><th>Date</th><th>Status</th><th>Late by</th></tr></thead>
+              <tbody id="repTableBody"></tbody>
+            </table>
+          </div>
+          <div class="pagination" id="repPagination"></div>
+        </div>
+      </section>
+
+      <!-- MACHINE SYNC -->
+      <section class="view" id="view-sync">
+        <div class="page-head">
+          <div><h1>Machine sync status</h1><p class="desc">Biometric terminals feeding attendance into the sheet.</p></div>
+          <button class="btn btn-primary btn-sm" id="syncNowBtn" style="width:auto;">Sync now</button>
+        </div>
+        <div class="grid grid-2-1">
+          <div class="card">
+            <div class="card-title">Terminals</div>
+            <div id="deviceList"></div>
+          </div>
+          <div class="card">
+            <div class="card-title">Sync log</div>
+            <div id="syncLog"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- REQUESTS -->
+      <section class="view" id="view-requests">
+        <div class="page-head"><div><h1>Leave &amp; regularization requests</h1><p class="desc">Review and action requests submitted by employees.</p></div></div>
+        <div class="card">
+          <div class="request-tabs" id="reqTabs">
+            <button class="request-tab active" data-status="Pending">Pending</button>
+            <button class="request-tab" data-status="Approved">Approved</button>
+            <button class="request-tab" data-status="Rejected">Rejected</button>
+            <button class="request-tab" data-status="">All</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Employee</th><th>Type</th><th>Details</th><th>Reason</th><th>Submitted</th><th>Status</th><th></th></tr></thead>
+              <tbody id="reqTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAYROLL -->
+      <section class="view" id="view-payroll">
+        <div class="page-head">
+          <div><h1>Payroll</h1><p class="desc">Attendance-based payroll for the company. Generate a month to lock in final numbers.</p></div>
+          <div style="display:flex;gap:10px;">
+            <select class="select" id="payrollMonthSelect"></select>
+            <button class="btn btn-primary btn-sm" id="generatePayrollBtn" style="width:auto;">Generate payroll</button>
+          </div>
+        </div>
+        <div class="grid grid-4 stagger-in" style="margin-bottom:18px;" id="payrollSummaryRow"></div>
+        <div class="card">
+          <div class="table-toolbar">
+            <input type="text" class="search-input" id="payrollSearch" placeholder="Search employee…">
+            <button class="btn btn-ghost btn-sm" id="exportPayrollBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16"/></svg>
+              Export CSV
+            </button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Employee</th><th>Department</th><th>Present</th><th>Absent</th><th>Gross</th><th>Deductions</th><th>Net pay</th><th>Status</th><th></th></tr></thead>
+              <tbody id="payrollTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="view" id="view-settings">
+        <div class="page-head"><div><h1>Settings</h1><p class="desc">Company defaults and admin notification preferences.</p></div></div>
+        <div class="grid grid-2-1">
+          <div class="card">
+            <div class="card-title">Company &amp; shift defaults</div>
+            <form id="adminSettingsForm">
+              <div class="field"><label>Company name</label><input type="text" id="setCompanyName"></div>
+              <div class="form-row-2">
+                <div class="field"><label>Shift start</label><input type="time" id="setShiftStart"></div>
+                <div class="field"><label>Shift end</label><input type="time" id="setShiftEnd"></div>
+              </div>
+              <div class="field"><label>Late grace period (minutes)</label><input type="number" id="setGrace" min="0" max="120"></div>
+              <button type="submit" class="btn btn-primary" style="width:auto;">Save settings</button>
+            </form>
+          </div>
+          <div class="card">
+            <div class="card-title">Admin notification preferences</div>
+            <div class="toggle-row">
+              <div><b>Device offline alerts</b><span>Notify when a biometric terminal drops</span></div>
+              <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+            </div>
+            <div class="toggle-row">
+              <div><b>New request alerts</b><span>Leave and regularization submissions</span></div>
+              <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+            </div>
+            <div class="toggle-row">
+              <div><b>Daily attendance digest</b><span>Summary email every morning at 9 AM</span></div>
+              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:18px;border-color:var(--danger);">
+          <div class="card-title" style="color:var(--danger);">Danger zone</div>
+          <p style="color:var(--muted);font-size:13px;margin-bottom:14px;">This resets all demo data — every added/edited employee, request, and approval — back to the original 152-employee sample dataset. This device only.</p>
+          <button class="btn btn-sm" id="resetDemoBtn" style="background:var(--danger-bg);color:var(--danger);width:auto;">Reset demo data</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div class="overlay" id="empOverlay"></div>
+<div class="drawer" id="empDrawer">
+  <div class="drawer-head">
+    <strong>Employee profile</strong>
+    <button class="drawer-close" id="drawerClose">✕</button>
+  </div>
+  <div class="drawer-body" id="empDrawerBody"></div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/mockData.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

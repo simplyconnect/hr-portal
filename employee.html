@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Attendance — Simply Connect</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="sidebar-scrim" id="scrim"></div>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-chip"><img class="brand-logo-img" src="assets/logo-icon.png" alt="Simply Connect"></div>
+    </div>
+
+    <div class="nav-group-label">Menu</div>
+    <nav>
+      <a href="#" class="nav-item active" data-view="overview" title="Overview">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        Home
+      </a>
+      <a href="#" class="nav-item" data-view="calendar" title="Calendar">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+        Calendar
+      </a>
+      <a href="#" class="nav-item" data-view="stats" title="Statistics">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 20V10M10 20V4M17 20v-7"/></svg>
+        Stats
+      </a>
+      <a href="#" class="nav-item" data-view="history" title="History">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5M12 7v5l3 3"/></svg>
+        History
+      </a>
+      <a href="#" class="nav-item" data-view="leave" title="Leave & Requests">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h4M9 11V9a2 2 0 0 1 2-2h6l4 4v7a2 2 0 0 1-2 2h-8"/><path d="M9 11v11M13 15h4"/></svg>
+        Leave
+      </a>
+      <a href="#" class="nav-item" data-view="payroll" title="Payroll">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg>
+        Payroll
+      </a>
+
+      <div class="nav-group-label">Account</div>
+      <a href="#" class="nav-item" data-view="profile" title="My Profile">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4.5 5-6 8-6s6.5 1.5 8 6"/></svg>
+        Profile
+      </a>
+      <a href="#" class="nav-item" data-view="settings" title="Settings">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Settings
+      </a>
+    </nav>
+
+    <div class="sidebar-foot">
+      <div class="sidebar-user">
+        <div class="avatar" id="sideAvatar">--</div>
+        <div>
+          <div class="name" id="sideName">Loading…</div>
+          <div class="role" id="sideRole">Employee</div>
+        </div>
+      </div>
+      <a href="#" class="logout-link" id="logoutBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        Sign out
+      </a>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <div class="topbar-brand">
+        <div class="logo-chip" style="padding:5px 9px;"><img src="assets/logo.png" alt="Simply Connect" style="height:16px;width:auto;display:block;"></div>
+        <span class="tb-company-pill">Simply Connect
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+        </span>
+      </div>
+      <div class="topbar-search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" id="historySearch" placeholder="Search attendance history…">
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-clock mono"><span class="live-dot"></span><span id="topClock">--:--:--</span></span>
+        <button class="btn-icon" id="helpBtn" aria-label="Help" title="Help">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 4.9.8c0 1.7-2.4 2-2.4 3.7"/><path d="M12 17.5h.01"/></svg>
+        </button>
+        <div class="notif-wrap">
+          <button class="btn-icon" id="notifBtn" aria-label="Notifications" title="Notifications">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="tb-dot hidden" id="notifDot"></span>
+          </button>
+          <div class="notif-panel" id="notifPanel">
+            <div class="notif-head"><strong>Notifications</strong><button id="markAllReadBtn">Mark all read</button></div>
+            <div id="notifList"></div>
+          </div>
+        </div>
+        <button class="btn-icon" data-theme-toggle aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="avatar tb-avatar" id="topAvatarBtn" title="My Profile">--</button>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- OVERVIEW -->
+      <section class="view active" id="view-overview">
+        <div class="page-head">
+          <div>
+            <h1 id="greeting">Welcome back</h1>
+            <p class="desc" id="todayLongDate">—</p>
+          </div>
+        </div>
+
+        <div class="grid grid-2-1" style="margin-bottom:18px;">
+          <div class="card hero-clock-card">
+            <div class="hero-top">
+              <div>
+                <div style="font-size:12.5px;color:#9AA3C0;margin-bottom:4px;">Today's status</div>
+                <span class="status-pill" id="todayStatusPill"><span class="dotting"></span> —</span>
+              </div>
+              <div class="mono" style="font-size:26px;font-weight:700;" id="heroClock">--:--:--</div>
+            </div>
+            <div class="hero-punch-row">
+              <div class="punch"><b class="mono" id="heroPunchIn">--:--</b><span>Punch In</span></div>
+              <div class="punch"><b class="mono" id="heroPunchOut">--:--</b><span>Punch Out</span></div>
+              <div class="punch"><b class="mono" id="heroWorked">--h --m</b><span>Worked today</span></div>
+              <div class="punch"><b class="mono" id="heroShift">09:30–18:30</b><span>Shift window</span></div>
+            </div>
+            <div class="hero-progress"><i id="heroProgressBar" style="width:0%"></i></div>
+            <div class="hero-foot">
+              <span id="heroProgressLabel">0% of your 8h target</span>
+              <span id="heroSyncNote">Synced from Main Gate Terminal</span>
+            </div>
+          </div>
+
+          <div class="card" style="display:flex;flex-direction:column;">
+            <div class="card-title">This month at a glance</div>
+            <canvas class="chart-canvas sm" id="monthDonut" style="flex:1;"></canvas>
+            <div class="cal-legend" style="margin-top:10px;justify-content:center;">
+              <span><i style="background:var(--ok)"></i>Present</span>
+              <span><i style="background:var(--warn)"></i>Late</span>
+              <span><i style="background:var(--danger)"></i>Absent</span>
+              <span><i style="background:var(--info)"></i>Leave</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-4 stagger-in" style="margin-bottom:18px;" id="statCardsRow">
+          <!-- filled by JS -->
+        </div>
+
+        <div class="grid grid-2-1">
+          <div class="card">
+            <div class="card-title">Working hours — last 14 days <span class="link" data-goto="stats">View full stats</span></div>
+            <canvas class="chart-canvas" id="hoursTrendChart"></canvas>
+          </div>
+          <div class="card">
+            <div class="card-title">Recent activity</div>
+            <div id="recentActivityList"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CALENDAR -->
+      <section class="view" id="view-calendar">
+        <div class="page-head">
+          <div><h1>Attendance calendar</h1><p class="desc">Every working day, color-coded. Click a day for details.</p></div>
+        </div>
+        <div class="grid grid-2-1">
+          <div class="card">
+            <div class="calendar-head">
+              <h3 id="calMonthLabel">—</h3>
+              <div class="calendar-nav">
+                <button class="btn-icon" id="calPrev"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
+                <button class="btn-icon" id="calNext"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
+              </div>
+            </div>
+            <div class="cal-grid" id="calDowRow"></div>
+            <div class="cal-grid" id="calGrid" style="margin-top:6px;"></div>
+            <div class="cal-legend">
+              <span><i style="background:var(--ok)"></i>Present</span>
+              <span><i style="background:var(--warn)"></i>Late</span>
+              <span><i style="background:var(--danger)"></i>Absent</span>
+              <span><i style="background:var(--info)"></i>Leave / Half day</span>
+              <span><i style="background:var(--muted-2)"></i>Weekend</span>
+            </div>
+          </div>
+          <div class="card" id="dayDetailCard">
+            <div class="card-title">Day details</div>
+            <div id="dayDetailBody" style="color:var(--muted);font-size:13.5px;">Select a day on the calendar to see punch details.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STATISTICS -->
+      <section class="view" id="view-stats">
+        <div class="page-head">
+          <div><h1>Monthly statistics</h1><p class="desc">Your attendance patterns for the selected month.</p></div>
+          <select class="select" id="statsMonthSelect"></select>
+        </div>
+        <div class="grid grid-4 stagger-in" style="margin-bottom:18px;" id="statsSummaryRow"></div>
+        <div class="grid grid-2-1">
+          <div class="card">
+            <div class="card-title">Daily working hours</div>
+            <canvas class="chart-canvas" id="statsBarChart"></canvas>
+          </div>
+          <div class="card">
+            <div class="card-title">Status breakdown</div>
+            <canvas class="chart-canvas" id="statsDonutChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- HISTORY -->
+      <section class="view" id="view-history">
+        <div class="page-head">
+          <div><h1>Attendance history</h1><p class="desc">Full punch record, searchable and filterable.</p></div>
+        </div>
+        <div class="card">
+          <div class="table-toolbar">
+            <div class="filter-row">
+              <select class="select" id="historyStatusFilter">
+                <option value="">All statuses</option>
+                <option>Present</option><option>Late</option><option>Absent</option>
+                <option>Half Day</option><option>On Leave</option><option>Weekend</option>
+              </select>
+              <input type="date" class="select" id="historyFrom">
+              <input type="date" class="select" id="historyTo">
+            </div>
+            <button class="btn btn-ghost btn-sm" id="exportHistoryBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16"/></svg>
+              Export CSV
+            </button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Date</th><th>Status</th><th>Punch In</th><th>Punch Out</th><th>Working hours</th><th>Late by</th></tr></thead>
+              <tbody id="historyTableBody"></tbody>
+            </table>
+          </div>
+          <div class="pagination" id="historyPagination"></div>
+        </div>
+      </section>
+
+      <!-- PROFILE -->
+      <section class="view" id="view-profile">
+        <div class="page-head"><div><h1>My profile</h1><p class="desc">Details synced from the employee master sheet.</p></div></div>
+        <div class="grid grid-2-1">
+          <div class="card">
+            <div class="profile-head" style="margin-bottom:20px;">
+              <div class="avatar" id="profAvatar">--</div>
+              <div>
+                <h3 id="profName">—</h3>
+                <span id="profDesig">—</span>
+              </div>
+            </div>
+            <div class="two-col-info" id="profInfoGrid"></div>
+          </div>
+          <div class="card">
+            <div class="card-title">Overall attendance rate</div>
+            <canvas class="chart-canvas sm" id="profileDonut"></canvas>
+            <p style="text-align:center;color:var(--muted);font-size:12.5px;margin-top:8px;">Based on the last 90 working days</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- LEAVE & REQUESTS -->
+      <section class="view" id="view-leave">
+        <div class="page-head">
+          <div><h1>Leave &amp; requests</h1><p class="desc">Check your balances, apply for leave, or request a punch correction.</p></div>
+          <div style="display:flex;gap:10px;">
+            <button class="btn btn-ghost btn-sm" id="openRegularizeBtn">Request correction</button>
+            <button class="btn btn-primary btn-sm" id="openLeaveBtn" style="width:auto;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+              Apply Leave
+            </button>
+          </div>
+        </div>
+        <div class="card-title" style="margin:0 0 10px;">Leave balances</div>
+        <div class="grid grid-3 stagger-in" id="leaveBalanceRow" style="margin-bottom:22px;"></div>
+        <div class="card">
+          <div class="card-title" style="margin-bottom:2px;">My Leave Requests</div>
+          <p style="color:var(--muted);font-size:12.5px;margin-bottom:14px;">Includes both leave applications and punch-correction requests you've submitted.</p>
+          <div class="request-tabs" id="myReqTabs">
+            <button class="request-tab active" data-status="">All</button>
+            <button class="request-tab" data-status="Pending">Pending</button>
+            <button class="request-tab" data-status="Approved">Approved</button>
+            <button class="request-tab" data-status="Rejected">Rejected</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Type</th><th>Dates</th><th>Reason</th><th>Submitted</th><th>Status</th></tr></thead>
+              <tbody id="myRequestsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAYROLL -->
+      <section class="view" id="view-payroll">
+        <div class="page-head">
+          <div><h1>Payroll</h1><p class="desc">Your computed payslip based on attendance for the month.</p></div>
+          <div style="display:flex;gap:10px;">
+            <select class="select" id="payslipMonthSelect"></select>
+            <button class="btn btn-primary btn-sm" id="downloadPayslipBtn" style="width:auto;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16"/></svg>
+              Download PDF
+            </button>
+          </div>
+        </div>
+        <div id="payslipContainer"></div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="view" id="view-settings">
+        <div class="page-head"><div><h1>Settings</h1><p class="desc">Update your contact details and notification preferences.</p></div></div>
+        <div class="grid grid-2-1">
+          <div class="card">
+            <div class="card-title">Contact details</div>
+            <form id="settingsForm">
+              <div class="form-row-2">
+                <div class="field"><label>Email</label><input type="email" id="setEmail" required></div>
+                <div class="field"><label>Phone</label><input type="tel" id="setPhone" required></div>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width:auto;">Save changes</button>
+            </form>
+            <div class="divider"></div>
+            <div class="card-title">Change password</div>
+            <form id="passwordForm">
+              <div class="form-row-2">
+                <div class="field"><label>New password</label><input type="password" id="setPass1" placeholder="••••••••" required></div>
+                <div class="field"><label>Confirm password</label><input type="password" id="setPass2" placeholder="••••••••" required></div>
+              </div>
+              <button type="submit" class="btn btn-ghost" style="width:auto;">Update password</button>
+            </form>
+          </div>
+          <div class="card">
+            <div class="card-title">Notification preferences</div>
+            <div class="toggle-row">
+              <div><b>Attendance sync alerts</b><span>Get notified when your punch syncs</span></div>
+              <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+            </div>
+            <div class="toggle-row">
+              <div><b>Leave request updates</b><span>Approvals and rejections</span></div>
+              <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+            </div>
+            <div class="toggle-row">
+              <div><b>Weekly summary email</b><span>Your attendance recap every Monday</span></div>
+              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:18px;border-color:var(--danger);">
+          <div class="card-title" style="color:var(--danger);">Danger zone</div>
+          <p style="color:var(--muted);font-size:13px;margin-bottom:14px;">This resets all demo data — added requests, edited profile info, everything — back to the original sample dataset. This device only.</p>
+          <button class="btn btn-sm" id="resetDemoBtn" style="background:var(--danger-bg);color:var(--danger);width:auto;">Reset demo data</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div class="overlay" id="dayOverlay"></div>
+
+<script src="js/config.js"></script>
+<script src="js/mockData.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/employee.js"></script>
+</body>
+</html>
