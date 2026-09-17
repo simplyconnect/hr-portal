@@ -72,16 +72,23 @@
 
   /* ------------------------------ load --------------------------------- */
   try {
-    const [employees, attendance] = await Promise.all([
-      DataService.fetchEmployees(),
-      DataService.fetchAttendance({}),
-    ]);
+    const employees = await DataService.fetchEmployees();
     employee = employees.find((e) => e.id === user.id) || employees[0];
+  } catch (err) {
+    Utils.toast("Could not load employee data. " + err.message, "error", 5000);
+    return;
+  }
+
+  // Attendance is wired up separately (backend currently restricts this
+  // endpoint to admins) — don't let it block showing the employee's own
+  // profile/leave/payroll info in the meantime.
+  try {
     records = (await DataService.fetchAttendance({ empId: employee.id })).sort((a, b) => a.date.localeCompare(b.date));
     recordsByDate = Object.fromEntries(records.map((r) => [r.date, r]));
   } catch (err) {
-    Utils.toast("Could not load attendance data. " + err.message, "error", 5000);
-    return;
+    console.warn("[employee.js] attendance not available yet:", err.message);
+    records = [];
+    recordsByDate = {};
   }
 
   document.getElementById("sideAvatar").textContent = Utils.initials(employee.name);
