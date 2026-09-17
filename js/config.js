@@ -188,7 +188,24 @@ const DataService = {
   /* --------------------------------- auth --------------------------------- */
   async login(role, identifier, password) {
     if (APP_CONFIG.USE_MOCK_DATA) return MockData.authenticate(role, identifier, password);
-    return sheetsPost("login", { role, identifier, password });
+    // Code.gs's login() takes { username, password } (not "identifier") and
+    // returns a FLAT object { success, token, role, employee } — not the
+    // { result: ... } envelope sheetsPost()/sheetsGet() expect elsewhere.
+    // So this talks to the endpoint directly instead of going through
+    // sheetsPost, and reshapes the reply into the { ok, user } / { ok:false,
+    // message } shape the rest of this app (auth.js) already expects.
+    try {
+      const res = await fetch(APP_CONFIG.GOOGLE_SHEETS_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({ action: "login", username: identifier, password }),
+      });
+      const data = await res.json();
+      if (!data.success) return { ok: false, message: data.error || "Invalid username or password." };
+      return { ok: true, user: { name: data.employee.name, role: data.role, id: data.employee.id } };
+    } catch (err) {
+      return { ok: false, message: "Could not reach the server. Please try again." };
+    }
   },
 
   /* ------------------------------ demo data ------------------------------ */
