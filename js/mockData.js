@@ -531,7 +531,7 @@ const MockData = (() => {
         return { ok: false, message: "Invalid admin username or password." };
       }
       const emp = employees.find((e) => e.empCode.toLowerCase() === identifier.trim().toLowerCase() || e.email.toLowerCase() === identifier.trim().toLowerCase());
-      if (!emp) return { ok: , message: "No employee found with that ID or email." };
+      if (!emp) return { ok: false, message: "No employee found with that ID or email." };
       if (emp.status === "Inactive") return { ok: false, message: "This account has been deactivated. Contact HR." };
       if (password !== "employee123") return { ok: false, message: "Incorrect password." };
       return { ok: true, user: { name: emp.name, role: "employee", id: emp.id } };
