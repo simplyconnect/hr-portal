@@ -64,29 +64,67 @@ const APP_CONFIG = {
 };
 
 /* Small fetch helpers so every DataService method doesn't repeat this. */
+// Code.gs requires a "token" param on every action except health/login/the
+// bridge endpoints — grab it from the saved session (auth.js) and attach it
+// automatically. Also: Code.gs returns a FLAT object like
+// { success, employees, rows, ... } — never { result: ... } — so these
+// return the whole parsed object and each DataService method below picks
+// out the field it needs.
+function authToken() {
+  try { return (typeof Session !== "undefined" && Session.get() && Session.get().token) || null; }
+  catch { return null; }
+}
 async function sheetsGet(action, params = {}) {
-  const qs = new URLSearchParams({ action, ...params });
+  const token = authToken();
+  const qs = new URLSearchParams({ action, ...(token ? { token } : {}), ...params });
   const res = await fetch(`${APP_CONFIG.GOOGLE_SHEETS_API_URL}?${qs}`);
   const data = await res.json();
-  if (!res.ok || data.error) throw new Error(data.error || `Request failed: ${action}`);
-  return data.result;
+  if (!res.ok || data.success === false) throw new Error(data.error || `Request failed: ${action}`);
+  return data;
 }
 async function sheetsPost(action, payload = {}) {
+  const token = authToken();
   const res = await fetch(APP_CONFIG.GOOGLE_SHEETS_API_URL, {
     method: "POST",
     headers: { "Content-Type": "text/plain;charset=utf-8" }, // see CORS note above — do not use application/json
-    body: JSON.stringify({ action, ...payload }),
+    body: JSON.stringify({ action, ...(token ? { token } : {}), ...payload }),
   });
   const data = await res.json();
-  if (!res.ok || data.error) throw new Error(data.error || `Request failed: ${action}`);
-  return data.result;
+  if (!res.ok || data.success === false) throw new Error(data.error || `Request failed: ${action}`);
+  return data;
+}
+// Code.gs's Employee rows only expose "EMP ID"/"Name"/"Department" as real
+// fields — every other column (Designation, Team, D.O.J, Timings, Salary)
+// comes back inside an attributes:[{label,value}] list. Flatten that into
+// the plain fields the rest of this app (employee.js/admin.js) expects.
+function normalizeAttrKey(label) {
+  return String(label || "").trim().toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+function mapEmployee(e) {
+  const attrs = {};
+  (e.attributes || []).forEach((a) => { attrs[normalizeAttrKey(a.label)] = a.value; });
+  return {
+    id: e.employeeId,
+    empCode: e.employeeId,
+    name: e.name,
+    department: e.department,
+    designation: attrs.designation || "",
+    team: attrs.team || "",
+    doj: attrs.doj || "",
+    timings: attrs.timings || "",
+    salary: Number(attrs.salary) || 0,
+    email: attrs.email || "",
+    phone: attrs.phone || "",
+    status: attrs.status || "Active",
+  };
 }
 
 const DataService = {
   /* ------------------------------ employees ------------------------------ */
   async fetchEmployees() {
     if (APP_CONFIG.USE_MOCK_DATA) return MockData.getEmployees();
-    return sheetsGet("getEmployees");
+    const data = await sheetsGet("getEmployees");
+    return (data.employees || []).map(mapEmployee);
   },
   async addEmployee(data) {
     if (APP_CONFIG.USE_MOCK_DATA) return MockData.addEmployee(data);
@@ -108,7 +146,12 @@ const DataService = {
     if (empId) params.empId = empId;
     if (from) params.from = from;
     if (to) params.to = to;
-    return sheetsGet("getAttendance", params);
+    // Note: Code.gs only allows admins to call "getAttendance" (even when
+    // scoped to one empId) — an employee session will get "Admin access
+    // required" here. Leaving as-is for now; attendance wiring is a
+    // separate follow-up.
+    const data = await sheetsGet("getAttendance", params);
+    return data.rows || [];
   },
   // Called by your biometric middleware (not the browser) each time someone
   // punches in/out, so it can push straight into the Attendance tab. Shown
@@ -202,7 +245,7 @@ const DataService = {
       });
       const data = await res.json();
       if (!data.success) return { ok: false, message: data.error || "Invalid username or password." };
-      return { ok: true, user: { name: data.employee.name, role: data.role, id: data.employee.id } };
+      return { ok: true, user: { name: data.employee.name, role: data.role, id: data.employee.id, token: data.token } };
     } catch (err) {
       return { ok: false, message: "Could not reach the server. Please try again." };
     }
