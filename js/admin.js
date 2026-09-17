@@ -637,22 +637,13 @@
         document.querySelectorAll("#reqTabs .request-tab").forEach((t) => t.classList.remove("active"));
         tab.classList.add("active");
         currentAdminReqFilter = tab.dataset.status;
-        document.getElementById("reqTableBody").innerHTML = `<tr><td colspan="7">${emptyRow("Loading…")}</td></tr>`;
         drawRequestsTable();
       });
     });
     drawRequestsTable();
   }
-  let reqDrawToken = 0;
   async function drawRequestsTable() {
-    // If tabs are clicked quickly, an earlier request (e.g. "Approved")
-    // can come back from the slow Apps Script backend AFTER a later one
-    // (e.g. "Rejected") and overwrite the table with stale data. This
-    // token makes sure only the response for the MOST RECENT click is
-    // ever allowed to touch the DOM.
-    const myToken = ++reqDrawToken;
     const rows = await DataService.fetchRequests({ status: currentAdminReqFilter || undefined });
-    if (myToken !== reqDrawToken) return; // a newer tab click has since fired — drop this stale response
     document.getElementById("reqTableBody").innerHTML = rows.map((r) => {
       const e = empById(r.empId);
       return `<tr>
